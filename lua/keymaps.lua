@@ -1,4 +1,15 @@
 local fzf = require("fzf-lua")
 
-vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Live grep" })
+-- Перемещения по проекту
+vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
+vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git files" })
+vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
+vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Search text" })
+vim.keymap.set("n", "<leader>fc", fzf.grep_curbuf, { desc = "Search current buffer" })
+vim.keymap.set("n", "<leader>f.", fzf.resume, { desc = "Resume picker" })
+-- Перемещения с использованием lsp
+vim.keymap.set("n", "<leader>ls", fzf.lsp_document_symbols, { desc = "Document symbols" })
+vim.keymap.set("n", "<leader>lS", fzf.lsp_workspace_symbols, { desc = "Workspace symbols" })
+vim.keymap.set("n", "<leader>ld", fzf.diagnostics_document, { desc = "Document diagnostics" })
+vim.keymap.set("n", "<leader>lD", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })

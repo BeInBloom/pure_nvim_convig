@@ -28,10 +28,11 @@ require("mason-lspconfig").setup({
         "ruff",
         "pyrefly",
     },
-    automatic_enable = {
-        "lua_ls",
-        "rust_analyzer",
-        "ruff",
-        "pyrefly",
-    },
+    -- automatic_enable = {
+    --     "lua_ls",
+    --     "rust_analyzer",
+    --     "ruff",
+    --     "pyrefly",
+    -- },
+    automatic_enable = true,
 })
