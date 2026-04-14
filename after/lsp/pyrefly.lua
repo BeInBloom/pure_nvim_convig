@@ -1,10 +1,22 @@
 return {
-	cmd = {
-		"pyrefly",
-		"lsp",
-		"--indexing-mode",
-		"lazy-non-blocking-background",
-		"--workspace-indexing-limit",
-		"2000",
-	},
+    cmd = {
+        "pyrefly",
+        "lsp",
+        "--indexing-mode",
+        "lazy-non-blocking-background",
+        "--workspace-indexing-limit",
+        "2000",
+    },
+    settings = {
+        python = {
+            analysis = {
+                inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                    callArgumentNames = "partial",
+                    pytestParameters = true,
+                },
+            },
+        },
+    },
 }
