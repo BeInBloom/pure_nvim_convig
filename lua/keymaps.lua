@@ -13,3 +13,9 @@ vim.keymap.set("n", "<leader>ls", fzf.lsp_document_symbols, { desc = "Document s
 vim.keymap.set("n", "<leader>lS", fzf.lsp_workspace_symbols, { desc = "Workspace symbols" })
 vim.keymap.set("n", "<leader>ld", fzf.diagnostics_document, { desc = "Document diagnostics" })
 vim.keymap.set("n", "<leader>lD", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })
+
+-- Переключение онлайн хинтов
+vim.keymap.set("n", "<leader>lh", function()
+    local enabled = vim.lsp.inlay_hint.is_enabled()
+    vim.lsp.inlay_hint.enable(not enabled)
+end, { desc = "Toggle inlay hints (global)" })
