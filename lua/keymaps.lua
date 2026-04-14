@@ -19,3 +19,7 @@ vim.keymap.set("n", "<leader>lh", function()
     local enabled = vim.lsp.inlay_hint.is_enabled()
     vim.lsp.inlay_hint.enable(not enabled)
 end, { desc = "Toggle inlay hints (global)" })
+
+-- Хоткеи для neo tree
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<cr>", { desc = "Neo-tree" })
+vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus filesystem left<cr>", { desc = "Focus neo-tree" })
