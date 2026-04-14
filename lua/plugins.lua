@@ -1,0 +1,7 @@
+require("plugins.colorscheme")
+require("plugins.telescope")
+require("plugins.lsp")
+require("plugins.ui")
+require("plugins.fzf")
+require("plugins.completion")
+require("plugins.noice")
