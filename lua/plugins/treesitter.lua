@@ -18,6 +18,14 @@ ts.install({
     "go",
     "rust",
     "python",
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "tsx",
+    "vue",
+    "heex",
+    "svelte",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -30,6 +38,16 @@ vim.api.nvim_create_autocmd("FileType", {
         "go",
         "sh",
         "bash",
+        "html",
+        "css",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "tsx",
+        "vue",
+        "heex",
+        "svelte",
     },
     callback = function(args)
         pcall(vim.treesitter.start, args.buf)
