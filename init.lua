@@ -1,3 +1,4 @@
+require("init")
 require("plugins")
 require("config")
 require("keymaps")

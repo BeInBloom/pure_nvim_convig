@@ -1,9 +1,17 @@
 {
   "plugins": {
+    "alpha-nvim": {
+      "rev": "7563da4a861ee6b3ed674d0ee5c5c0bd19383a38",
+      "src": "https://github.com/goolord/alpha-nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
+    },
+    "dashboard-nvim": {
+      "rev": "62a10d9d55132b338dd742afc3c8a2683f3dd426",
+      "src": "https://github.com/nvimdev/dashboard-nvim"
     },
     "fzf-lua": {
       "rev": "1e866cce085cc6df3d3e4fb59f00105fa84cef6c",

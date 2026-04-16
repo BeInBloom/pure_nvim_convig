@@ -12,7 +12,7 @@ require("neo-tree").setup({
     enable_diagnostics = true,
 
     filesystem = {
-        hijack_netrw_behavior = "open_default",
+        hijack_netrw_behavior = "open_current",
         follow_current_file = {
             enabled = true,
         },
@@ -28,7 +28,7 @@ require("neo-tree").setup({
         mappings = {
             ["l"] = "open",
             ["h"] = "close_node",
-			["H"] = "toggle_hidden",
+            ["H"] = "toggle_hidden",
             ["z"] = "toggle_node",
             ["Y"] = "copy_path",
             ["/"] = "noop",
