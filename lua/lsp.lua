@@ -8,14 +8,17 @@ local lsp_augroup = vim.api.nvim_create_augroup("my_lsp_config", { clear = true 
 local format_on_save_augroup = vim.api.nvim_create_augroup("my_lsp_format_on_save", { clear = true })
 local format_priority = {
 	"ruff",
-	"eslint",
-	"biome",
 	"lua_ls",
 	"gopls",
 	"rust_analyzer",
-	"svelte",
-	"cssls",
-	"html",
+}
+local external_format_clients = {
+	biome = true,
+	cssls = true,
+	eslint = true,
+	html = true,
+	svelte = true,
+	ts_ls = true,
 }
 
 local function get_attached_client(args)
@@ -26,6 +29,11 @@ end
 local function apply_client_overrides(client)
 	if client.name == "ruff" then
 		client.server_capabilities.hoverProvider = false
+	end
+
+	if external_format_clients[client.name] then
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
 	end
 end
 
