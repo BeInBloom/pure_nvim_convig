@@ -4,6 +4,10 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
 })
 
+vim.lsp.config("*", {
+    capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
+
 require("mason").setup({
     PATH = "prepend",
     max_concurrent_installers = 4,
@@ -28,6 +32,12 @@ require("mason-lspconfig").setup({
         "gopls",
         "ruff",
         "pyrefly",
+        "html",
+        "cssls",
+        "tailwindcss",
+        "ts_ls",
+        "svelte",
+        "eslint",
     },
     automatic_enable = true,
 })

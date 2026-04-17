@@ -1,17 +1,19 @@
+local hints = {
+	inlayHints = {
+		typeHints = {
+			enable = true,
+		},
+		parameterHints = {
+			enable = true,
+		},
+		chainingHints = {
+			enable = true,
+		},
+	},
+}
+
 return {
-    settings = {
-        ["rust-analyzer"] = {
-            inlayHints = {
-                typeHints = {
-                    enable = true,
-                },
-                parameterHints = {
-                    enable = true,
-                },
-                chainingHints = {
-                    enable = true,
-                },
-            },
-        },
-    },
+	settings = {
+		["rust-analyzer"] = hints,
+	},
 }
