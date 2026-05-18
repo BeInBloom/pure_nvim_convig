@@ -4,6 +4,11 @@ vim.pack.add({
 	{ src = "https://github.com/folke/noice.nvim" },
 })
 
+require("notify").setup({
+	stages = "static",
+	timeout = 2000,
+})
+
 local function hover_size()
 	return {
 		width = "auto",
@@ -24,8 +29,6 @@ local function update_hover_size()
 end
 
 require("noice").setup({
-	timeout = 2000,
-	stages = 'static',
 	lsp = {
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -33,17 +36,12 @@ require("noice").setup({
 		},
 	},
 	views = {
-		hover = {
-			size = hover_size(),
-		},
+		hover = { size = hover_size(), },
 	},
 	routes = {
 		{
-			filter = {
-				event = "notify",
-				["not"] = { error = true },
-			},
-			opts = { skip = true },
+			view = "cmdline_output",
+			filter = { cmdline = "^:%s*!" },
 		},
 	},
 	presets = {
@@ -56,6 +54,8 @@ require("noice").setup({
 })
 
 vim.api.nvim_create_autocmd("VimResized", {
-	group = vim.api.nvim_create_augroup("DynamicNoiceHoverSize", { clear = true }),
+	group = vim.api.nvim_create_augroup("DynamicNoiceHoverSize", {
+		clear = true
+	}),
 	callback = update_hover_size,
 })
