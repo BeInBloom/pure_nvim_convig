@@ -1,14 +1,10 @@
 local hints = {
+	check = { command = "clippy" },
+
 	inlayHints = {
-		typeHints = {
-			enable = true,
-		},
-		parameterHints = {
-			enable = true,
-		},
-		chainingHints = {
-			enable = true,
-		},
+		typeHints = { enable = true, },
+		parameterHints = { enable = true, },
+		chainingHints = { enable = true, },
 	},
 }
 

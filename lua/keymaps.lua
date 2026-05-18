@@ -22,7 +22,7 @@ end, { desc = "Prev diagnostic" })
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1 })
 end, { desc = "Next diagnostic" })
-vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+vim.keymap.set("n", "<leader>lg", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })
 
@@ -49,10 +49,10 @@ vim.keymap.set("n", "<leader>bc", function()
 end, { desc = "Close other buffers" })
 
 -- tabs
-vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New tab" })
-vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Delete tab" })
-vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Delete tab" })
+vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
 
 -- Навигация по окнам / tmux panes
 vim.keymap.set("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>")
