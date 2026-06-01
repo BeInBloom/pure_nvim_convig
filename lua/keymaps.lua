@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
 vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git files" })
 vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
-vim.keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Search text" })
+vim.keymap.set("n", "<leader>ft", fzf.live_grep, { desc = "Search text" })
 vim.keymap.set("n", "<leader>fc", fzf.grep_curbuf, { desc = "Search current buffer" })
 vim.keymap.set("n", "<leader>f.", fzf.resume, { desc = "Resume picker" })
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
@@ -47,6 +47,8 @@ vim.keymap.set("n", "<leader>bc", function()
 		end
 	end
 end, { desc = "Close other buffers" })
+vim.keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" })
+vim.keymap.set("n", "\\", "<C-w>s", { desc = "Horizontal split" })
 
 -- tabs
 vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New tab" })

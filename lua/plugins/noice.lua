@@ -10,11 +10,15 @@ require("notify").setup({
 })
 
 local function hover_size()
+	local win_width = vim.api.nvim_win_get_width(0)
+	local win_height = vim.api.nvim_win_get_height(0)
+
 	return {
 		width = "auto",
 		height = "auto",
-		max_width = math.max(45, math.min(90, math.floor(vim.o.columns * 0.55))),
-		max_height = math.max(8, math.min(20, math.floor(vim.o.lines * 0.35))),
+
+		max_width = math.floor(win_width * 0.85),
+		max_height = math.floor(win_height * 0.6),
 	}
 end
 
