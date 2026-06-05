@@ -17,7 +17,7 @@ require("blink.cmp").setup({
 
 	keymap = {
 		preset = "default",
-		["<C-Space>"] = {},
+		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<C-p>"] = { "select_prev", "fallback" },
 		["<Tab>"] = {},
 		["<S-Tab>"] = {},
@@ -58,7 +58,7 @@ require("blink.cmp").setup({
 
 	cmdline = {
 		keymap = {
-			preset = "inherit",
+			preset = "cmdline",
 			["<CR>"] = { "accept_and_enter", "fallback" },
 		},
 	},

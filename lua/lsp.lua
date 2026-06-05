@@ -148,9 +148,7 @@ local function setup_inlay_hints(client, bufnr)
 		toggle_inlay_hints(bufnr)
 	end, "Toggle inlay hints")
 
-	if vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
+	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 end
 
 local function on_lsp_attach(args)
