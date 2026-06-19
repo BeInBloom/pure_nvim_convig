@@ -1,4 +1,5 @@
 -- lua/keymaps.lua
+local buffers = require("actions.buffers")
 local fzf = require("fzf-lua")
 
 -- Поиск / проект
@@ -6,6 +7,7 @@ vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
 vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git files" })
 vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fp", fzf.grep_project, { desc = "Search project lines" })
 vim.keymap.set("n", "<leader>ft", fzf.live_grep, { desc = "Search text" })
 vim.keymap.set("n", "<leader>fc", fzf.grep_curbuf, { desc = "Search current buffer" })
 vim.keymap.set("n", "<leader>f.", fzf.resume, { desc = "Resume picker" })
@@ -34,19 +36,9 @@ vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus filesystem left<cr>", { des
 vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save all buffers" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save current buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>wa<cr><cmd>qa<cr>", { desc = "Quit Neovim" })
-vim.keymap.set("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Close buffer" })
-vim.keymap.set("n", "<leader>c", "<C-w>c", { desc = "Close window" })
-vim.keymap.set("n", "<leader>bc", function()
-	local current = vim.api.nvim_get_current_buf()
-
-	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if buf ~= current and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
-			if vim.bo[buf].buftype == "" and not vim.bo[buf].modified then
-				vim.cmd("bdelete " .. buf)
-			end
-		end
-	end
-end, { desc = "Close other buffers" })
+vim.keymap.set("n", "<leader>q", buffers.close_current, { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>c", "<cmd>close<cr>", { desc = "Close window" })
+vim.keymap.set("n", "<leader>bc", buffers.close_others, { desc = "Close other buffers" })
 vim.keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" })
 vim.keymap.set("n", "\\", "<C-w>s", { desc = "Horizontal split" })
 
