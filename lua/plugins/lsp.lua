@@ -31,6 +31,8 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",
 		"gopls",
 		"zls",
+		"elixirls",
+		"clojure_lsp",
 		"ruff",
 		"pyrefly",
 		"html",

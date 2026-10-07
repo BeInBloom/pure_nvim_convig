@@ -4,6 +4,8 @@ vim.pack.add({
 
 local ts = require("nvim-treesitter")
 
+vim.treesitter.language.register("clojure", "edn")
+
 ts.setup({
 	install_dir = vim.fn.stdpath("data") .. "/site",
 })
@@ -18,6 +20,8 @@ ts.install({
 	"go",
 	"rust",
 	"zig",
+	"elixir",
+	"clojure",
 	"python",
 	"html",
 	"css",
@@ -37,6 +41,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		"python",
 		"rust",
 		"zig",
+		"elixir",
+		"clojure",
+		"edn",
 		"go",
 		"sh",
 		"bash",
