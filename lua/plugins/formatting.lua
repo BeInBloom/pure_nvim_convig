@@ -24,6 +24,25 @@ end
 
 require("conform").setup({
     formatters_by_ft = formatters_by_ft,
+    formatters = {
+        prettier = {
+            prepend_args = function()
+                local plugin = vim.fs.joinpath(
+                    vim.fn.stdpath("data"),
+                    "mason",
+                    "packages",
+                    "prettier",
+                    "node_modules",
+                    "prettier-plugin-svelte",
+                    "plugin.js"
+                )
+                if vim.uv.fs_stat(plugin) then
+                    return { "--plugin", plugin }
+                end
+                return {}
+            end,
+        },
+    },
     format_after_save = function(bufnr)
         if not prettier_filetype_set[vim.bo[bufnr].filetype] then
             return
