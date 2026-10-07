@@ -112,10 +112,6 @@ local function setup_formatting(client, bufnr)
 		format_buffer(bufnr)
 	end, "Format buffer")
 
-	if client:supports_method("textDocument/willSaveWaitUntil", bufnr) then
-		return
-	end
-
 	vim.api.nvim_clear_autocmds({
 		group = format_on_save_augroup,
 		buffer = bufnr,
