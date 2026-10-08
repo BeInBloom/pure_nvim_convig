@@ -8,6 +8,26 @@ vim.lsp.config("*", {
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
+-- ts_ls and svelte otherwise use Neovim's cwd when no project root exists,
+-- which can point to an unrelated project when opening a standalone file.
+local js_project_markers = {
+	"package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock", "deno.lock", ".git",
+}
+
+for _, name in ipairs({ "ts_ls", "svelte" }) do
+	local original_root_dir = vim.lsp.config[name].root_dir
+	vim.lsp.config(name, {
+		root_dir = function(bufnr, on_dir)
+			original_root_dir(bufnr, function(root)
+				if root == vim.fn.getcwd() and not vim.fs.root(bufnr, js_project_markers) then
+					root = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+				end
+				on_dir(root)
+			end)
+		end,
+	})
+end
+
 require("mason").setup({
 	PATH = "prepend",
 	max_concurrent_installers = 4,

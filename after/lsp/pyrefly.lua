@@ -16,6 +16,10 @@ return {
 	},
 	settings = {
 		python = {
+			pyrefly = {
+				-- The default "basic" preset suppresses type errors in unconfigured files.
+				typeCheckingMode = "default",
+			},
 			analysis = {
 				inlayHints = hints,
 			},
