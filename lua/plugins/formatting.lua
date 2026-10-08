@@ -14,6 +14,11 @@ local prettier_filetypes = {
     "svelte",
 }
 
+-- Python formats via the Ruff LSP instead of an external formatter.
+local lsp_format_filetypes = {
+    python = true,
+}
+
 local formatters_by_ft = {}
 local prettier_filetype_set = {}
 
@@ -24,6 +29,23 @@ end
 
 require("conform").setup({
     formatters_by_ft = formatters_by_ft,
+    format_after_save = function(bufnr)
+        if lsp_format_filetypes[vim.bo[bufnr].filetype] then
+            return {
+                timeout_ms = 3000,
+                lsp_format = "fallback",
+            }
+        end
+
+        if not prettier_filetype_set[vim.bo[bufnr].filetype] then
+            return
+        end
+
+        return {
+            timeout_ms = 3000,
+            lsp_format = "never",
+        }
+    end,
     formatters = {
         prettier = {
             prepend_args = function()
@@ -43,16 +65,6 @@ require("conform").setup({
             end,
         },
     },
-    format_after_save = function(bufnr)
-        if not prettier_filetype_set[vim.bo[bufnr].filetype] then
-            return
-        end
-
-        return {
-            timeout_ms = 3000,
-            lsp_format = "never",
-        }
-    end,
 })
 
 vim.keymap.set("n", "<leader>lf", function()

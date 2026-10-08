@@ -18,15 +18,21 @@ if go_linter.args then
 	end
 end
 
-local function lint_buffer()
-	if vim.bo.filetype ~= "go" then
+local function lint_buffer(args)
+	local bufnr = args and args.buf or vim.api.nvim_get_current_buf()
+	if vim.bo[bufnr].filetype ~= "go" then
 		lint.try_lint()
 		return
 	end
 
-	local filename = vim.api.nvim_buf_get_name(0)
+	local filename = vim.api.nvim_buf_get_name(bufnr)
 	if filename ~= "" and go_linter.args and vim.fn.executable(go_linter.cmd) == 1 then
 		lint.try_lint(nil, { cwd = vim.fs.dirname(filename) })
+		-- Re-run for hidden buffers saved by :wall, because nvim-lint
+		-- publishes diagnostics only for the current buffer via buffer 0.
+		if bufnr ~= vim.api.nvim_get_current_buf() then
+			vim.api.nvim_buf_call(bufnr, lint.try_lint)
+		end
 	end
 end
 
