@@ -49,10 +49,9 @@ end
 function M.close_others()
 	local current = vim.api.nvim_get_current_buf()
 
-	-- Buffers shown in other windows are kept: :bdelete would close those splits.
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if buf ~= current and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
-			if vim.bo[buf].buftype == "" and not vim.bo[buf].modified and #vim.fn.win_findbuf(buf) == 0 then
+			if vim.bo[buf].buftype == "" and not vim.bo[buf].modified then
 				vim.cmd("bdelete " .. buf)
 			end
 		end
