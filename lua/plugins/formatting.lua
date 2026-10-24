@@ -14,38 +14,64 @@ local prettier_filetypes = {
     "svelte",
 }
 
--- Python formats via the Ruff LSP instead of an external formatter.
-local lsp_format_filetypes = {
-    python = true,
+-- Filetypes without a conform formatter (Python via Ruff, Lua, Go, ...) fall
+-- back to a single LSP client, picked by this priority and then by name.
+-- Clients that defer to Prettier have formatting disabled in lua/lsp.lua.
+local lsp_format_priority = {
+    "ruff",
+    "lua_ls",
+    "gopls",
+    "rust_analyzer",
 }
 
 local formatters_by_ft = {}
-local prettier_filetype_set = {}
 
 for _, filetype in ipairs(prettier_filetypes) do
     formatters_by_ft[filetype] = { "prettier" }
-    prettier_filetype_set[filetype] = true
+end
+
+local function get_lsp_format_client(bufnr)
+    local clients = vim.lsp.get_clients({
+        bufnr = bufnr,
+        method = "textDocument/formatting",
+    })
+
+    if #clients == 0 then
+        return nil
+    end
+
+    local clients_by_name = {}
+    for _, client in ipairs(clients) do
+        clients_by_name[client.name] = client
+    end
+
+    for _, name in ipairs(lsp_format_priority) do
+        if clients_by_name[name] then
+            return clients_by_name[name]
+        end
+    end
+
+    table.sort(clients, function(left, right)
+        return left.name < right.name
+    end)
+
+    return clients[1]
+end
+
+local function format_opts(bufnr)
+    local client = get_lsp_format_client(bufnr)
+
+    return {
+        bufnr = bufnr,
+        timeout_ms = 3000,
+        lsp_format = "fallback",
+        id = client and client.id,
+    }
 end
 
 require("conform").setup({
     formatters_by_ft = formatters_by_ft,
-    format_after_save = function(bufnr)
-        if lsp_format_filetypes[vim.bo[bufnr].filetype] then
-            return {
-                timeout_ms = 3000,
-                lsp_format = "fallback",
-            }
-        end
-
-        if not prettier_filetype_set[vim.bo[bufnr].filetype] then
-            return
-        end
-
-        return {
-            timeout_ms = 3000,
-            lsp_format = "never",
-        }
-    end,
+    format_on_save = format_opts,
     formatters = {
         prettier = {
             prepend_args = function()
@@ -68,10 +94,7 @@ require("conform").setup({
 })
 
 vim.keymap.set("n", "<leader>lf", function()
-    require("conform").format({
-        timeout_ms = 1000,
-        lsp_format = "fallback",
-    })
+    require("conform").format(format_opts(vim.api.nvim_get_current_buf()))
 end, {
     desc = "Format buffer",
 })

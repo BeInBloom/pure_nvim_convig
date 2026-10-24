@@ -5,13 +5,7 @@ vim.diagnostic.config({
 })
 
 local lsp_augroup = vim.api.nvim_create_augroup("my_lsp_config", { clear = true })
-local format_on_save_augroup = vim.api.nvim_create_augroup("my_lsp_format_on_save", { clear = true })
-local format_priority = {
-	"ruff",
-	"lua_ls",
-	"gopls",
-	"rust_analyzer",
-}
+-- Formatting itself lives in lua/plugins/formatting.lua (conform).
 local external_format_clients = {
 	biome = true,
 	cssls = true,
@@ -37,8 +31,10 @@ local function apply_client_overrides(client)
 	end
 end
 
+-- nowait: built-in global maps (grr, gri, gra, ...) would otherwise make
+-- buffer-local "gr" wait 'timeoutlen' for a possible longer match.
 local function map(bufnr, mode, lhs, rhs, desc)
-	vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+	vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, nowait = true })
 end
 
 local function set_supported_keymaps(client, bufnr)
@@ -58,72 +54,6 @@ local function set_supported_keymaps(client, bufnr)
 			map(bufnr, keymap.mode, keymap.lhs, keymap.rhs, keymap.desc)
 		end
 	end
-end
-
-local function get_format_client(bufnr)
-	local clients = vim.lsp.get_clients({
-		bufnr = bufnr,
-		method = "textDocument/formatting",
-	})
-
-	if #clients == 0 then
-		return nil
-	end
-
-	local clients_by_name = {}
-	for _, client in ipairs(clients) do
-		clients_by_name[client.name] = client
-	end
-
-	for _, name in ipairs(format_priority) do
-		local client = clients_by_name[name]
-		if client then
-			return client
-		end
-	end
-
-	table.sort(clients, function(left, right)
-		return left.name < right.name
-	end)
-
-	return clients[1]
-end
-
-local function format_buffer(bufnr)
-	local client = get_format_client(bufnr)
-
-	if not client then
-		return
-	end
-
-	vim.lsp.buf.format({
-		bufnr = bufnr,
-		id = client.id,
-		timeout_ms = 1000,
-	})
-end
-
-local function setup_formatting(client, bufnr)
-	if not client:supports_method("textDocument/formatting", bufnr) then
-		return
-	end
-
-	map(bufnr, "n", "<leader>lf", function()
-		format_buffer(bufnr)
-	end, "Format buffer")
-
-	vim.api.nvim_clear_autocmds({
-		group = format_on_save_augroup,
-		buffer = bufnr,
-	})
-
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = format_on_save_augroup,
-		buffer = bufnr,
-		callback = function()
-			format_buffer(bufnr)
-		end,
-	})
 end
 
 local function toggle_inlay_hints(bufnr)
@@ -156,7 +86,6 @@ local function on_lsp_attach(args)
 
 	apply_client_overrides(client)
 	set_supported_keymaps(client, bufnr)
-	setup_formatting(client, bufnr)
 	setup_inlay_hints(client, bufnr)
 end
 
