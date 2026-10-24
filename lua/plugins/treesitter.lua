@@ -4,8 +4,6 @@ vim.pack.add({
 
 local ts = require("nvim-treesitter")
 
-vim.treesitter.language.register("clojure", "edn")
-
 ts.setup({
 	install_dir = vim.fn.stdpath("data") .. "/site",
 })
@@ -43,7 +41,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"zig",
 		"elixir",
 		"clojure",
-		"edn",
 		"go",
 		"sh",
 		"bash",
@@ -53,7 +50,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"javascriptreact",
 		"typescript",
 		"typescriptreact",
-		"tsx",
 		"vue",
 		"heex",
 		"svelte",

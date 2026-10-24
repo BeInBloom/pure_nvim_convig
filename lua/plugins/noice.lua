@@ -86,7 +86,6 @@ require("noice").setup({
 		bottom_search = true,
 		command_palette = true,
 		long_message_to_split = true,
-		inc_rename = true,
 		lsp_doc_border = true,
 	},
 })
@@ -97,7 +96,6 @@ vim.api.nvim_create_autocmd({
 	"WinEnter",
 	"BufWinEnter",
 	"CursorMoved",
-	"CursorMovedI",
 }, {
 	group = vim.api.nvim_create_augroup("DynamicNoiceHoverSize", {
 		clear = true,

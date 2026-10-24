@@ -8,6 +8,9 @@ require("fzf-lua").setup({
 	"telescope",
 	fzf_colors = true,
 	winopts = { backdrop = 85 },
+	ui_select = {
+		winopts = { width = 0.5, height = 0.4 },
+	},
 	keymap = {
 		builtin = {
 			["<C-f>"] = "preview-page-down",

@@ -16,14 +16,7 @@ vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear search h
 -- LSP / symbols / diagnostics
 vim.keymap.set("n", "<leader>ld", fzf.diagnostics_document, { desc = "Document diagnostics" })
 vim.keymap.set("n", "<leader>lD", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })
-
-vim.keymap.set("n", "[d", function()
-	vim.diagnostic.jump({ count = -1 })
-end, { desc = "Prev diagnostic" })
-
-vim.keymap.set("n", "]d", function()
-	vim.diagnostic.jump({ count = 1 })
-end, { desc = "Next diagnostic" })
+-- [d / ]d are built-in since Neovim 0.11.
 vim.keymap.set("n", "<leader>lg", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })

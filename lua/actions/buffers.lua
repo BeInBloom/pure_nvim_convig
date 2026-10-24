@@ -8,6 +8,18 @@ function M.close_current()
 		return
 	end
 
+	-- Special buffers (help, neo-tree, dashboard, terminal) are not part of the
+	-- buffer list: close their window instead of loading a file into it.
+	if vim.bo[current].buftype ~= "" or not vim.bo[current].buflisted then
+		if not pcall(vim.cmd.close) then
+			local ok, err = pcall(vim.api.nvim_buf_delete, current, {})
+			if not ok then
+				vim.notify(err, vim.log.levels.ERROR)
+			end
+		end
+		return
+	end
+
 	local alternate = vim.fn.bufnr("#")
 	if alternate > 0 and alternate ~= current and vim.api.nvim_buf_is_valid(alternate) and vim.bo[alternate].buflisted then
 		vim.cmd("buffer " .. alternate)
@@ -37,9 +49,10 @@ end
 function M.close_others()
 	local current = vim.api.nvim_get_current_buf()
 
+	-- Buffers shown in other windows are kept: :bdelete would close those splits.
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if buf ~= current and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
-			if vim.bo[buf].buftype == "" and not vim.bo[buf].modified then
+			if vim.bo[buf].buftype == "" and not vim.bo[buf].modified and #vim.fn.win_findbuf(buf) == 0 then
 				vim.cmd("bdelete " .. buf)
 			end
 		end

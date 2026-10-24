@@ -1,4 +1,4 @@
-require("init")
+require("globals")
 require("plugins")
 require("config")
 require("keymaps")

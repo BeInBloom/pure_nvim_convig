@@ -1,6 +1,5 @@
 require("plugins.treesitter")
 require("plugins.colorscheme")
-require("plugins.telescope")
 require("plugins.completion")
 require("plugins.lsp")
 require("plugins.lint")

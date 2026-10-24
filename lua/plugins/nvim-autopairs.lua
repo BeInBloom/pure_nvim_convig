@@ -3,7 +3,6 @@ vim.pack.add({
 })
 
 require("nvim-autopairs").setup({
-	disable_filetype = { "TelescopePrompt", "spectre_panel", "snacks_picker_input" },
 	check_ts = true,
 	map_cr = true,
 	map_bs = true,
