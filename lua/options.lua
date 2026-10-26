@@ -13,3 +13,4 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 vim.opt.showmode = false
+vim.opt.autoread = true
