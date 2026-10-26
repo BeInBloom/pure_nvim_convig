@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>bc", buffers.close_others, { desc = "Close other bu
 vim.keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" })
 vim.keymap.set("n", "\\", "<C-w>s", { desc = "Horizontal split" })
 
-vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New tab" })
-vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Delete tab" })
-vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New tab" })
+vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Delete tab" })
+vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
