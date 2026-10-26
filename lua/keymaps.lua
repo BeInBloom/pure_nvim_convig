@@ -1,9 +1,7 @@
--- Core keymaps; plugin keymaps live next to their plugin in lua/plugins/.
 local buffers = require("actions.buffers")
 
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
--- diagnostics
 -- [d / ]d are built-in since Neovim 0.11.
 vim.keymap.set("n", "<leader>lg", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 

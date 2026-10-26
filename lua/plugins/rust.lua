@@ -1,7 +1,3 @@
--- rustaceanvim starts rust-analyzer itself (from rustup, matching the
--- toolchain), so rust_analyzer is excluded from mason-lspconfig.
--- vim.g.rustaceanvim must be set before the plugin is loaded.
-
 local function rust_lsp(...)
 	local args = { ... }
 	return function()
@@ -10,8 +6,7 @@ local function rust_lsp(...)
 end
 
 local function on_attach(_, bufnr)
-	-- LspAttach (lua/lsp_attach.lua) runs before on_attach, so these
-	-- override the generic K and <leader>la in Rust buffers.
+	-- Runs after LspAttach, so these override the generic K and <leader>la.
 	local function map(lhs, rhs, desc)
 		vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
 	end
@@ -32,10 +27,11 @@ local function on_attach(_, bufnr)
 	map("<leader>rp", rust_lsp("parentModule"), "Parent module")
 end
 
+-- Must be set before the plugin is loaded.
 vim.g.rustaceanvim = {
 	server = {
 		on_attach = on_attach,
-		-- check is left unset: rustaceanvim picks clippy with --no-deps.
+		-- No check override: rustaceanvim defaults to clippy with --no-deps.
 		default_settings = {
 			["rust-analyzer"] = {
 				inlayHints = {
