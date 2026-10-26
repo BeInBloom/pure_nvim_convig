@@ -1,6 +1,6 @@
 require("globals")
 require("plugins")
-require("config")
+require("options")
 require("keymaps")
 require("lsp_attach")
 require("autocmd")
