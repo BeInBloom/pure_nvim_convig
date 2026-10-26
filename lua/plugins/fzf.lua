@@ -2,9 +2,10 @@ vim.pack.add({
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
 })
 
+local fzf = require("fzf-lua")
 local actions = require("fzf-lua.actions")
 
-require("fzf-lua").setup({
+fzf.setup({
 	"telescope",
 	fzf_colors = true,
 	winopts = { backdrop = 85 },
@@ -34,3 +35,15 @@ require("fzf-lua").setup({
 		},
 	},
 })
+
+vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
+vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git files" })
+vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent files" })
+vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fp", fzf.grep_project, { desc = "Search project lines" })
+vim.keymap.set("n", "<leader>ft", fzf.live_grep, { desc = "Search text" })
+vim.keymap.set("n", "<leader>fc", fzf.grep_curbuf, { desc = "Search current buffer" })
+vim.keymap.set("n", "<leader>f.", fzf.resume, { desc = "Resume picker" })
+
+vim.keymap.set("n", "<leader>ld", fzf.diagnostics_document, { desc = "Document diagnostics" })
+vim.keymap.set("n", "<leader>lD", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })

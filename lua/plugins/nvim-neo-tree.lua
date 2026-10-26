@@ -35,3 +35,6 @@ require("neo-tree").setup({
 		},
 	},
 })
+
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle filesystem reveal left<cr>", { desc = "Neo-tree" })
+vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus filesystem left<cr>", { desc = "Focus neo-tree" })
