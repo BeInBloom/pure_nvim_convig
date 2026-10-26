@@ -62,7 +62,6 @@ require("mason").setup({
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
-		"rust_analyzer",
 		"gopls",
 		"zls",
 		"elixirls",
@@ -76,5 +75,6 @@ require("mason-lspconfig").setup({
 		"svelte",
 		"eslint",
 	},
-	automatic_enable = true,
+	-- rust-analyzer is run by rustaceanvim (lua/plugins/rust.lua).
+	automatic_enable = { exclude = { "rust_analyzer" } },
 })

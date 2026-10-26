@@ -21,7 +21,7 @@ local lsp_format_priority = {
     "ruff",
     "lua_ls",
     "gopls",
-    "rust_analyzer",
+    "rust-analyzer",
 }
 
 local formatters_by_ft = {}
