@@ -5,7 +5,6 @@ vim.diagnostic.config({
 })
 
 local lsp_augroup = vim.api.nvim_create_augroup("my_lsp_config", { clear = true })
--- Formatting itself lives in lua/plugins/formatting.lua (conform).
 local external_format_clients = {
 	biome = true,
 	cssls = true,

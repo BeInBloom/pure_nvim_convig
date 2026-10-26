@@ -7,7 +7,6 @@ vim.keymap.set("n", "<leader>lg", vim.diagnostic.open_float, { desc = "Line diag
 
 vim.keymap.set("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })
 
--- buffer
 vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save all buffers" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save current buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>wa<cr><cmd>qa<cr>", { desc = "Quit Neovim" })
@@ -17,7 +16,6 @@ vim.keymap.set("n", "<leader>bc", buffers.close_others, { desc = "Close other bu
 vim.keymap.set("n", "|", "<C-w>v", { desc = "Vertical split" })
 vim.keymap.set("n", "\\", "<C-w>s", { desc = "Horizontal split" })
 
--- tabs
 vim.keymap.set("n", "<leader>tt", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Delete tab" })
 vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next tab" })

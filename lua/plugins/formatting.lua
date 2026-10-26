@@ -14,9 +14,6 @@ local prettier_filetypes = {
     "svelte",
 }
 
--- Filetypes without a conform formatter (Python via Ruff, Lua, Go, ...) fall
--- back to a single LSP client, picked by this priority and then by name.
--- Clients that defer to Prettier have formatting disabled in lua/lsp_attach.lua.
 local lsp_format_priority = {
     "ruff",
     "lua_ls",

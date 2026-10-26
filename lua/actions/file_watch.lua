@@ -44,8 +44,7 @@ local function watch_current_file()
 	end
 	local real_path = vim.uv.fs_realpath(path) or path
 	local basename = vim.fs.basename(real_path)
-	-- Symlinked files never change inside the link's directory, so watch
-	-- the resolved path's directory instead.
+	-- A symlink's own directory never sees the target change.
 	local watch_dir = vim.fs.dirname(real_path)
 	local ok = fs_event:start(watch_dir, {}, function(err, filename)
 		if err or (filename and vim.fs.basename(filename) ~= basename) then

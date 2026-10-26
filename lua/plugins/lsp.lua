@@ -28,10 +28,8 @@ for _, name in ipairs({ "ts_ls", "svelte" }) do
 	})
 end
 
--- tailwindcss ships elixir filetypes (elixir, eelixir, heex, html-eex) and a
--- '.git' root_dir fallback, so it attaches to every elixir buffer in a git
--- repo. Strip the elixir-related filetypes so only elixirls serves them
--- (this also stops double hover results on K).
+-- tailwindcss would attach to every elixir buffer in a git repo via its '.git'
+-- root fallback, duplicating elixirls (e.g. double hover on K).
 local tailwind_filetypes = vim.list_extend({}, vim.lsp.config.tailwindcss.filetypes)
 local elixir_filetypes = { elixir = true, eelixir = true, heex = true, ["html-eex"] = true }
 tailwind_filetypes = vim.tbl_filter(function(ft)

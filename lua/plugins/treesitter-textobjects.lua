@@ -62,8 +62,7 @@ local function has_textobject(lang, capture)
     return ok and query ~= nil and vim.list_contains(query.captures, capture)
 end
 
--- Built-in at/it work in any filetype; replace them only where a textobjects
--- query defines @tag (html, jsx/tsx, svelte, vue, heex).
+-- Built-in at/it stay in filetypes without a @tag query.
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("my_tag_textobjects", { clear = true }),
     callback = function(args)
