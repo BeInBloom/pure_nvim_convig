@@ -18,6 +18,16 @@ rustup component add rust-analyzer
 
 Не устанавливайте `rust-analyzer` через Mason: он окажется первым в `PATH` и заменит версию из rustup.
 
+## Отладка
+
+nvim-dap и nvim-dap-view; адаптеры ставятся через Mason вручную:
+
+```
+:MasonInstall delve debugpy codelldb
+```
+
+Python-скрипты запускаются системным `python3`, если не активирован `$VIRTUAL_ENV`.
+
 ## Одиночные файлы
 
 Для файлов вне проекта подключаются поддерживающие их LSP: `gopls`, `ruff` и `pyrefly`, `lua_ls`, `zls`, `clojure_lsp`, `html`, `cssls`, `ts_ls` и `svelte`. Для JS/TS и Svelte корнем без маркеров становится каталог файла, а не текущий рабочий каталог Neovim. `pyrefly` использует preset `default` для файлов без собственной конфигурации, чтобы показывать ошибки типов; настройки `pyrefly.toml` в проектах продолжают действовать. `golangci-lint` проверяет сам файл, если рядом нет `go.mod`, независимо от того, из какого каталога запущен Neovim.

@@ -25,6 +25,7 @@ local function on_attach(_, bufnr)
 	map("<leader>rc", rust_lsp("openCargo"), "Open Cargo.toml")
 	map("<leader>rd", rust_lsp("openDocs"), "Open docs.rs")
 	map("<leader>rp", rust_lsp("parentModule"), "Parent module")
+	map("<leader>dn", rust_lsp("debug"), "Debug at cursor")
 end
 
 -- Must be set before the plugin is loaded.
